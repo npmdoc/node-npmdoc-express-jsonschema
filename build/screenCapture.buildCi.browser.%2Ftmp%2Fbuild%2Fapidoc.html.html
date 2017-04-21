@@ -1,0 +1,237 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a>express-jsonschema (v1.1.6)</a>
+</h1>
+<h4>Express middleware for jsonschema validation.</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.express-jsonschema">module express-jsonschema</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.express-jsonschema.JsonSchemaCustomPropertyError">
+            function <span class="apidocSignatureSpan">express-jsonschema.</span>JsonSchemaCustomPropertyError
+            <span class="apidocSignatureSpan">(propertyName)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.express-jsonschema.JsonSchemaValidation">
+            function <span class="apidocSignatureSpan">express-jsonschema.</span>JsonSchemaValidation
+            <span class="apidocSignatureSpan">(validations)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.express-jsonschema.addSchemaProperties">
+            function <span class="apidocSignatureSpan">express-jsonschema.</span>addSchemaProperties
+            <span class="apidocSignatureSpan">(newProperties)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.express-jsonschema.validate">
+            function <span class="apidocSignatureSpan">express-jsonschema.</span>validate
+            <span class="apidocSignatureSpan">(schemas, schemaDependencies)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.express-jsonschema" id="apidoc.module.express-jsonschema">module express-jsonschema</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.express-jsonschema.JsonSchemaCustomPropertyError" id="apidoc.element.express-jsonschema.JsonSchemaCustomPropertyError">
+        function <span class="apidocSignatureSpan">express-jsonschema.</span>JsonSchemaCustomPropertyError
+        <span class="apidocSignatureSpan">(propertyName)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function JsonSchemaCustomPropertyError(propertyName) {
+<span class="apidocCodeCommentSpan">    /** @member {String} name */
+</span>    this.name = 'JsonSchemaCustomPropertyError';
+
+    /** @member {String} message */
+    this.message = (
+        'express-jsonschema: The schema property "' + propertyName +
+        '" already exists. See if it achieves what you need or try ' +
+        'giving it another name.'
+    );
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.express-jsonschema.JsonSchemaValidation" id="apidoc.element.express-jsonschema.JsonSchemaValidation">
+        function <span class="apidocSignatureSpan">express-jsonschema.</span>JsonSchemaValidation
+        <span class="apidocSignatureSpan">(validations)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function JsonSchemaValidation(validations) {
+<span class="apidocCodeCommentSpan">    /** @member {String} name */
+</span>    this.name = 'JsonSchemaValidation';
+
+    /** @member {String} message */
+    this.message = 'express-jsonschema: Invalid data found';
+
+    /** @member {Object} validations */
+    this.validations = formatValidations(validations);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.express-jsonschema.addSchemaProperties" id="apidoc.element.express-jsonschema.addSchemaProperties">
+        function <span class="apidocSignatureSpan">express-jsonschema.</span>addSchemaProperties
+        <span class="apidocSignatureSpan">(newProperties)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function addSchemaProperties(newProperties) {
+    var validator = new jsonschema.Validator();
+    Object.keys(newProperties).forEach(function(attr) {
+        if (validator.attributes[attr]) {
+            throw new JsonSchemaCustomPropertyError(attr);
+        }
+        customProperties[attr] = newProperties[attr];
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.express-jsonschema.validate" id="apidoc.element.express-jsonschema.validate">
+        function <span class="apidocSignatureSpan">express-jsonschema.</span>validate
+        <span class="apidocSignatureSpan">(schemas, schemaDependencies)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function validate(schemas, schemaDependencies) {
+    var validator = new jsonschema.Validator();
+
+    if (Array.isArray(schemaDependencies)) {
+        schemaDependencies.forEach(function(dependency){
+            validator.addSchema(dependency);
+        });
+    }
+
+    Object.keys(customProperties).forEach(function(attr) {
+        validator.attributes[attr] = customProperties[attr];
+    });
+
+    return function(req, res, next) {
+        var validations = {};
+        Object.keys(schemas).forEach(function(requestProperty) {
+            var schema = schemas[requestProperty],
+                validation;
+
+            validation = validator.validate(
+                req[requestProperty],
+                schema,
+                {propertyName: 'request.' + requestProperty}
+            );
+            if (!validation.valid) {
+                validations[requestProperty] = validation;
+            }
+        });
+        if (Object.keys(validations).length) {
+            next(new JsonSchemaValidation(validations));
+        } else {
+            next();
+        }
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+    return function(req, res, next) {
+        var validations = {};
+        Object.keys(schemas).forEach(function(requestProperty) {
+var schema = schemas[requestProperty],
+    validation;
+
+validation = validator.<span class="apidocCodeKeywordSpan">validate</span>(
+    req[requestProperty],
+    schema,
+    {propertyName: 'request.' + requestProperty}
+);
+if (!validation.valid) {
+    validations[requestProperty] = validation;
+}
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
